@@ -5,18 +5,18 @@ export default function useDragAndDrop() {
   const [dragData, setDragData] = useState(null);
 
   // When dragging starts
-  const handleDragStart = (data) => (e) => {
+  const handleDragStart = (data:any) => (e:any) => {
     setDragData(data);   //dragged element ko data state me save krta hai
     e.dataTransfer.setData("component", JSON.stringify(data));
   }; //it tells browser what we drag
 
   // Allow drop because default behaviour me drop allow nhi hota
-  const allowDrop = (e) => {
+  const allowDrop = (e:any) => {
     e.preventDefault();
   };
 
   // When dropped on target call the callback function
-  const handleDrop = (callback) => (e) => {
+  const handleDrop = (callback:any) => (e:any) => {
     e.preventDefault();
     const raw = e.dataTransfer.getData("application/custom");  //Browser se drag data niklane ki kosis krta hai taaki hame drop k tym pta ho konsa component gira hai
 

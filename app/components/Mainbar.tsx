@@ -86,7 +86,8 @@ export default function Mainbar({
     const section = sections.find((s) => s.id === sectionId);
     if (!section) return;
 
-    const element = section.elements.find((el) => el.id === elementId);
+    const element = section.elements.find(
+    ((el:any) => el.id === elementId));
     if (!element) return;
 
     setResizing({
@@ -123,13 +124,13 @@ export default function Mainbar({
 
     const newRowSpan = resizing.startRowSpan + Math.round(dy / ROW_HEIGHT);
 
-    setSections((prev) =>
-      prev.map((section) => {
+    setSections((prev:any[]) =>
+      prev.map((section:any) => {
         if (section.id !== resizing.sectionId) return section;
 
         return {
           ...section,
-          elements: section.elements.map((el) => {
+          elements: section.elements.map((el:any) => {
             if (el.id !== resizing.elementId) return el;
 
             const resized = {
@@ -139,7 +140,7 @@ export default function Mainbar({
             };
 
             const hasCollision = section.elements.some(
-              (other) => other.id !== el.id && isOverlapping(resized, other)
+              (other:any) => other.id !== el.id && isOverlapping(resized, other)
             );
 
             //  Takra gaya → resize cancel
@@ -156,8 +157,8 @@ export default function Mainbar({
   const handleMove = (e: React.MouseEvent) => {
     if (!moving) return;
 
-    setSections((prev) =>
-      prev.map((section) => {
+    setSections((prev:any) =>
+      prev.map((section:any) => {
         if (section.id !== moving.sectionId) return section;
 
         const sectionEl = document.getElementById(
@@ -183,7 +184,7 @@ export default function Mainbar({
 
         return {
           ...section,
-          elements: section.elements.map((el) => {
+          elements: section.elements.map((el:any) => {
             if (el.id !== moving.elementId) return el;
 
             const moved = {
@@ -193,7 +194,7 @@ export default function Mainbar({
             };
 
             const hasCollision = section.elements.some(
-              (other) => other.id !== el.id && isOverlapping(moved, other)
+              (other:any) => other.id !== el.id && isOverlapping(moved, other)
             );
 
             //overlap → move cancel
@@ -212,7 +213,7 @@ export default function Mainbar({
     const data = JSON.parse(e.dataTransfer.getData("component"));
 
     if (data.kind === "section") {
-      setSections((prev) => [
+      setSections((prev:any) => [
         ...prev,
         {
           id: Date.now(),
@@ -224,12 +225,12 @@ export default function Mainbar({
   };
 
   const updateText = (sectionId: number, elementId: number, value: string) => {
-    setSections((prev) =>
-      prev.map((section) =>
+    setSections((prev:any) =>
+      prev.map((section:any) =>
         section.id === sectionId
           ? {
               ...section,
-              elements: section.elements.map((el) =>
+              elements: section.elements.map((el:any) =>
                 el.id === elementId ? { ...el, text: value } : el
               ),
             }
@@ -239,12 +240,12 @@ export default function Mainbar({
   };
 
   const deleteElement = (sectionId: number, elementId: number) => {
-    setSections((prev) =>
-      prev.map((section) =>
+    setSections((prev:any) =>
+      prev.map((section:any) =>
         section.id === sectionId
           ? {
               ...section,
-              elements: section.elements.filter((el) => el.id !== elementId),
+              elements: section.elements.filter((el:any) => el.id !== elementId),
             }
           : section
       )
@@ -255,7 +256,7 @@ export default function Mainbar({
 
   //section delete logic
   const deleteSection = (sectionId: number) => {
-    setSections((prev) => prev.filter((section) => section.id !== sectionId));
+    setSections((prev:any) => prev.filter((section:any) => section.id !== sectionId));
   };
 
   const handleElementDrop = (
@@ -297,11 +298,11 @@ export default function Mainbar({
 
     };
 
-    setSections((prev) =>
-      prev.map((section) => {
+    setSections((prev:any) =>
+      prev.map((section:any) => {
         if (section.id !== sectionId) return section;
 
-        const hasCollision = section.elements.some((el) =>
+        const hasCollision = section.elements.some((el:any) =>
           isOverlapping(newElement, el)
         );
 
@@ -451,12 +452,12 @@ border-2
   const html = e.currentTarget.innerHTML;
   const text = e.currentTarget.innerText;
 
-  setSections((prev) =>
-    prev.map((section) =>
+  setSections((prev:any) =>
+    prev.map((section:any) =>
       section.id === activeElement.sectionId
         ? {
             ...section,
-            elements: section.elements.map((el) =>
+            elements: section.elements.map((el:any) =>
               el.id === activeElement.elementId
                 ? {
                     ...el,

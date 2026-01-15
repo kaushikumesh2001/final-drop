@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import Script from "next/script";
 
 export default function BootstrapClient() {
-  useEffect(() => {
-    import("bootstrap/dist/js/bootstrap.bundle.min.js");
-  }, []);
-
-  return null;
+  return (
+    <Script
+      src="/bootstrap.bundle.min.js"
+      strategy="afterInteractive"
+    />
+  );
 }

@@ -28,7 +28,7 @@ export default function BuilderPage() {
 
       return {
         ...section,
-        elements: section.elements.map((el) => {
+        elements: section.elements.map((el:any) => {
           if (el.id !== activeElement.elementId) return el;  //sirf selected element ko update karna hai
 
           //  IMAGE SRC SPECIAL CASE
@@ -107,7 +107,7 @@ const applyFontSize = (size: number) => {
     if (!section) return null;
 
     const element = section.elements.find(   //Us section k ander active element
-      (el) => el.id === activeElement.elementId
+      (el:any) => el.id === activeElement.elementId
     );
 
     return element?.style ?? null;
@@ -124,7 +124,7 @@ const applyFontSize = (size: number) => {
   if (!section) return null;
 
   return section.elements.find(
-    (el) => el.id === activeElement.elementId
+    (el:any) => el.id === activeElement.elementId
   );
 })();
 
